@@ -6,12 +6,13 @@ import argparse
 
 def main():
     """Сreate documentation for programm"""
-    parser = argparse.ArgumentParser(description='Process some integers.')
-    parser.add_argument('integers', metavar='N', type=int, nargs='+',
-                        help='an integer for the accumulator')
-    parser.add_argument('--sum', dest='accumulate', action='store_const',
-                        const=sum, default=max,
-                        help='sum the integers (default: find the max)')
+    parser = argparse.ArgumentParser(description='Program for compare two files and print difference.')
+    parser.add_argument('first_file',
+                        metavar='first_file',
+                        help='First file to compare')
+    parser.add_argument('second_file',
+                        metavar='second_file',
+                        help='Second file to compare')
 
     args = parser.parse_args()
     print(args.accumulate(args.integers))
