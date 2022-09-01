@@ -2,6 +2,8 @@
 
 gendiff:
 	poetry run gendiff
+tests:
+	poetry run pytest
 lint:
 	poetry run flake8 brain_games
 install:
