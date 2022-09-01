@@ -1,3 +1,5 @@
 *cache*
 .idea
 dist
+.venv
+.vim
