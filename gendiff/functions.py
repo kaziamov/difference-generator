@@ -4,36 +4,71 @@
 import json
 
 
-def open_file(path_to_file, format='json'):
+def open_file_as_dict(path_to_file, format='json'):
     """
     Open file in choicen format.
     By default as JSON
     """
-    with open(path_to_file, 'r') as file_to_dict:
-        dict = json.loads(file_to_dict)
-        return dict
+    with open(path_to_file, 'r') as json_file:
+        return json.load(json_file)
 
 
-def create_set(iterable_for_set):
+def convert_to_set(iterable_for_set):
+    """Convert iterable object to set"""
     return set(iterable_for_set)
 
 
 def get_union(set1, set2):
+    """Create union from two sets"""
     return set1 | set2
 
 
 def get_intersection_of_many(set1, set2):
+    """Create intersection for two sets"""
     return set1 & set2
 
 
-def generate_diff(file1, file2, format='json'):
+def get_unique_in_set1(set1, set2):
+    """Extract unique values for first set from two input sets"""
+    return set1 - set2
+
+
+def get_unique_in_set2(set1, set2):
+    """Extract and return unique values for second set from two input sets"""
+    return set2 - set1
+
+
+def generate_diff(path_to_file1, path_to_file2, format='json'):
     """
     Conveyor for generate diff
     for two files.
     """
-    # return map(open_file, files)
-    [open_file(file) for file in files]
+    dict1, dict2 = tuple(map(open_file_as_dict, (path_to_file1, path_to_file2)))
+    set1, set2 = tuple(map(convert_to_set, (dict1, dict2)))
+
+    all_keys = sorted(get_union(set1, set2))
+
+    unique_set1_keys = get_unique_in_set1(set1, set2)
+    unique_set2_keys = get_unique_in_set2(set1, set2)
+
+    result = []
+    for key in all_keys:
+        if key in unique_set1_keys:
+            result.append(f'- {key}: {dict1[key]}')
+        elif key in unique_set2_keys:
+            result.append(f'+ {key}: {dict2[key]}')
+        else:
+            if dict1[key] == dict2[key]:
+                result.append(f'  {key}: {dict1[key]}')
+            else:
+                result.append(f'- {key}: {dict1[key]}')
+                result.append(f'+ {key}: {dict2[key]}')
+
+    print_diff(result)
 
 
-def print_diff():
-    pass
+def print_diff(list_):
+    """Output iterable on new line"""
+    list_.insert(0, '{')
+    list_.append('}')
+    print(*list_, sep='\n')
