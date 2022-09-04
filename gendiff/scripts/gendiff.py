@@ -2,6 +2,7 @@
 
 # Import build-in modules
 import argparse
+from gendiff import generate_diff
 
 
 def main():
@@ -11,13 +12,14 @@ def main():
                         help='First file to compare')
     parser.add_argument('second_file',
                         help='Second file to compare')
-    parser.add_argument('-f', '--format',
-                        metavar='FORMAT',
-                        help='Get choice for output file format')
+    # parser.add_argument('-f', '--format',
+    #                     metavar='FORMAT',
+    #                     help='Get choice for output file format')
 
     args = parser.parse_args()
     # print(args.accumulate(args.integers))
-
+    diff = generate_diff(args.first_file, args.second_file)
+    print(diff)
 
 if __name__ == '__main__':
     main()
