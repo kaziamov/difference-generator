@@ -1,0 +1,19 @@
+
+name: Linter&Tests
+
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  testing:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: pip install poetry
+      - run: poetry install
+      - name: linter
+        run: make lint
+      - name: pytest
+        run: make mtest
