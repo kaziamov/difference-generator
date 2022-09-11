@@ -1,6 +1,6 @@
 #Makefile
 
-mgendiff:
+gd-h:
 	poetry run gendiff -h
 mtest:
 	poetry run pytest
