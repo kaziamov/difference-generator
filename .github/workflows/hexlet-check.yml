@@ -20,6 +20,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Check linter
+        run: make lint
+
+      - uses: actions/checkout@v2
+      - name: Run pytest
+        run: make mtest
 
       - name: Hexlet project check
         uses: hexlet/project-action@release
