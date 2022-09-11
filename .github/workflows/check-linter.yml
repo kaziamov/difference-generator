@@ -1,0 +1,16 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - 'main'
+    tags:
+      - '**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: make install
+      - run: make lint
+      - run: make mtest
