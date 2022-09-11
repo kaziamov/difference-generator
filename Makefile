@@ -1,11 +1,11 @@
 #Makefile
 
-gendiff:
-	poetry run gendiff
-tests:
+mgendiff:
+	poetry run gendiff -h
+mtest:
 	poetry run pytest
 lint:
-	poetry run flake8 brain_games
+	poetry run flake8 gendiff
 install:
 	poetry install
 build:
