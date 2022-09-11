@@ -1,16 +1,32 @@
 name: CI
 
-on:
-  push:
-    branches:
-      - 'main'
-    tags:
-      - '**'
+language: python
+dist: xenial
+python:
+  - "^3.7"
+
+stages:
+  - Quality
+  - Testing
+
+before_install:
+  - pip install poetry
+
+install:
+  - poetry install
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - run: make install
-      - run: make lint
-      - run: make mtest
+  include:
+    - stage: Quality
+      name: lint
+      script: make lint
+    - name: type
+      script: make type
+    - name: tests
+      script: make tests
+    - stage: Testing
+      name: pytest
+      script: make mtest
+
+after_success:
+  poetry run coveralls
