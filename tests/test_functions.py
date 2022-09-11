@@ -47,5 +47,5 @@ def test_generate_diff():
   + timeout: 20
   + verbose: true
 }'''
-    assert functions.generate_diff(path_file1, path_file2) == result
+    assert functions.generate_diff(path_file1, path_file2) == print(result)
 
