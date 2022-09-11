@@ -1,21 +1,6 @@
 from gendiff import functions
 
 
-# def test_open_file_as_dict():
-#     path_file1 = """{
-#       "host": "hexlet.io",
-#       "timeout": 50,
-#       "proxy": "123.234.53.22",
-#       "follow": false
-#     }"""
-#     path_file2 = """{
-#       "timeout": 20,
-#       "verbose": true,
-#       "host": "hexlet.io"
-#     }"""
-#     assert functions.open_file_as_dict(path_file1) == {'host': 'hexlet.io', 'timeout': 50, 'proxy': '123.234.53.22', 'follow': False}
-#     assert functions.open_file_as_dict(path_file2) == {'timeout': 20, 'verbose': True, 'host': 'hexlet.io'}
-
 def test_convert_to_set():
     assert functions.convert_to_set([1, 2, 3, 4]) == {1, 2, 3, 4}
     assert functions.convert_to_set([1, 2, 3, 3, 2, 4]) == {1, 2, 3, 4}
@@ -36,11 +21,13 @@ def test_get_intersection_of_many():
     result = {'Paris'}
     assert functions.get_intersection_of_many(set1, set2) == result
 
+
 def test_get_unique_in_set1():
     set1 = {'Paris', 'London'}
     set2 = {'Moscow', 'Paris'}
     result = {'London'}
     assert functions.get_unique_in_set1(set1,set2) == result
+
 
 def test_get_unique_in_set2():
     set1 = {'Paris', 'London'}
@@ -48,26 +35,17 @@ def test_get_unique_in_set2():
     result = {'Moscow'}
     assert functions.get_unique_in_set2(set1, set2) == result
 
-# def test_generate_diff():
-#
-# #     file1 = """{
-# #   "host": "hexlet.io",
-# #   "timeout": 50,
-# #   "proxy": "123.234.53.22",
-# #   "follow": false
-# # }"""
-# #     file2 = """{
-# #   "timeout": 20,
-# #   "verbose": true,
-# #   "host": "hexlet.io"
-# # }"""
-#     result = '''{
-#   - follow: false
-#     host: hexlet.io
-#   - proxy: 123.234.53.22
-#   - timeout: 50
-#   + timeout: 20
-#   + verbose: true
-# }'''
-#     assert functions.generate_diff(path_file1, path_file2) == result
+
+def test_generate_diff():
+    path_file1 = "tests/fixtures/file1.json"
+    path_file2 = "tests/fixtures/file2.json"
+    result = '''{
+  - follow: false
+    host: hexlet.io
+  - proxy: 123.234.53.22
+  - timeout: 50
+  + timeout: 20
+  + verbose: true
+}'''
+    assert functions.generate_diff(path_file1, path_file2) == result
 
