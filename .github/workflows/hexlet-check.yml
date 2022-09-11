@@ -20,6 +20,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        run: make install
+
+      - uses: actions/checkout@v2
       - name: Check linter
         run: make lint
 
