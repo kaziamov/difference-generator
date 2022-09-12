@@ -1,21 +1,17 @@
-name: gendiff_cli
+name: lint-test
 
-on:
-  - push
-  - pull_request
+on: ['push']
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
-      - run: |
-          pip install poetry
-          poetry install
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      - run: pip install poetry
+      - run: make install
       - name: Run linter and pytest
-        run: |
-          make mtest
+        run: make mtest
       - name: Test & publish code coverage
         uses: paambaati/codeclimate-action@v2.7.4
         env:
