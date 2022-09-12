@@ -12,7 +12,6 @@ jobs:
       - uses: actions/checkout@v2
       - name: check
         run: | 
-          pip install poetry
           make install
           make lint
           make mtest
