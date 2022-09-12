@@ -11,7 +11,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
-      - name: check
       - run: pip install poetry
       - run: make install
       - run: make lint
