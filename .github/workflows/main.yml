@@ -10,8 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
       - name: check
-        run: | 
-          make install
-          make lint
-          make mtest
+      - run: pip install poetry
+      - run: make install
+      - run: make lint
+      - run: make mtest
