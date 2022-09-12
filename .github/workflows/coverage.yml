@@ -1,17 +1,20 @@
-name: lint-test
+name: coverage
 
-on: ['push']
+on:
+  push:
+    branches: [ "main" ]
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
       - run: pip install poetry
       - run: make install
-      - name: Run linter and pytest
-        run: make mtest
+      - run: make lint
+      - run: make mtest
       - name: Test & publish code coverage
         uses: paambaati/codeclimate-action@v2.7.4
         env:
