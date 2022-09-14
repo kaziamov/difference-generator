@@ -12,7 +12,6 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = "^3.7"
-pathlib = "^1.0.1"
 PyYAML = "^6.0"
 
 [tool.poetry.group.dev.dependencies]
