@@ -1,5 +1,6 @@
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/kazyamov/python-project-50/workflows/hexlet-check/badge.svg)](https://github.com/kazyamov/python-project-50/actions)
+[![lint-test](https://github.com/kazyamov/python-project-50/actions/workflows/main.yml/badge.svg)](https://github.com/kazyamov/python-project-50/actions/workflows/main.yml)
 [![Maintainability](https://api.codeclimate.com/v1/badges/a63b06c7c934f53534d2/maintainability)](https://codeclimate.com/github/kazyamov/python-project-50/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/a63b06c7c934f53534d2/test_coverage)](https://codeclimate.com/github/kazyamov/python-project-50/test_coverage)
 
