@@ -6,7 +6,9 @@ import yaml
 
 def convert_to_yml(document):
     """Input Python dictionary and convert to yalm"""
-    return yaml.dump(document, default_flow_style=False)
+    return yaml.dump(document,
+                     default_flow_style=False,
+                     sort_keys=False)
 
 
 def convert_to_json(document):
@@ -14,6 +16,5 @@ def convert_to_json(document):
     return json.dumps(document,
                       skipkeys=True,
                       allow_nan=True,
-                      indent=4,
-                      separators=("\n", ": ")
+                      indent=2,
                       )
