@@ -1,7 +1,14 @@
 # Import build-in modules
 import json
-import yaml
 import pathlib
+
+# Import third-part modules
+import yaml
+
+try:
+    from yaml import CLoader as Loader, CDumper as Dumper
+except ImportError:
+    from yaml import Loader, Dumper
 
 
 def check_format(path_to_file):
@@ -27,7 +34,7 @@ def parse_json(file):
 
 
 def parse_yaml(file):
-    return yaml.load(file)
+    return yaml.load(file, Loader=Loader)
 
 
 def make_error(file):

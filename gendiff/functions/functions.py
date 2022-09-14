@@ -60,10 +60,6 @@ def generate_diff(path_to_file1, path_to_file2, format='json'):
     print_diff(result)
 
 
-# def generate_diff_experiment(path_to_file1, path_to_file2):
-#     open_file()
-
-
 def print_diff(list_):
     """Output iterable on new line"""
     list_.insert(0, '{')

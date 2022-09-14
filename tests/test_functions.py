@@ -45,9 +45,22 @@ def test_generate_diff():
         result = file.read()
     assert functions.generate_diff(path_file1, path_file2) == print(result)
 
-# def test_generate_diff2():
-#     path_file1 = "tests/fixtures/test_gen_diff/file1.yaml"
-#     path_file2 = "tests/fixtures/test_gen_diff/file2.yml"
-#     result_file = "tests/fixtures/test_gen_diff/file2.txt"
-#     result = ''''''
-#     assert functions.generate_diff(path_file1, path_file2) == print(result)
+
+def test_generate_diff2():
+    path_ = 'tests/fixtures/test_gen_diff/2/'
+    path_file1 = path_ + "file1.yaml"
+    path_file2 = path_ + "file2.yaml"
+    result_file = path_ + "result.txt"
+    with open(result_file, "r") as file:
+        result = file.read()
+    assert functions.generate_diff(path_file1, path_file2) == print(result)
+
+
+def test_generate_diff3():
+    path_ = 'tests/fixtures/test_gen_diff/3/'
+    path_file1 = path_ + "file1.yml"
+    path_file2 = path_ + "file2.yml"
+    result_file = path_ + "result.txt"
+    with open(result_file, "r") as file:
+        result = file.read()
+    assert functions.generate_diff(path_file1, path_file2) == print(result)
