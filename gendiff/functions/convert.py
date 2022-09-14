@@ -17,5 +17,3 @@ def convert_to_json(document):
                       indent=4,
                       separators=("\n", ": ")
                       )
-
-
