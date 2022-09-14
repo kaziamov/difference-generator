@@ -1,4 +1,4 @@
-from gendiff import functions
+from gendiff.functions import functions
 
 
 def test_convert_to_set():
@@ -26,7 +26,7 @@ def test_get_unique_in_set1():
     set1 = {'Paris', 'London'}
     set2 = {'Moscow', 'Paris'}
     result = {'London'}
-    assert functions.get_unique_in_set1(set1,set2) == result
+    assert functions.get_unique_in_set1(set1, set2) == result
 
 
 def test_get_unique_in_set2():
@@ -37,15 +37,17 @@ def test_get_unique_in_set2():
 
 
 def test_generate_diff():
-    path_file1 = "tests/fixtures/file1.json"
-    path_file2 = "tests/fixtures/file2.json"
-    result = '''{
-  - follow: false
-    host: hexlet.io
-  - proxy: 123.234.53.22
-  - timeout: 50
-  + timeout: 20
-  + verbose: true
-}'''
+    path_ = 'tests/fixtures/test_gen_diff/1/'
+    path_file1 = path_ + "file1.json"
+    path_file2 = path_ + "file2.json"
+    result_file = path_ + "result.txt"
+    with open(result_file, "r") as file:
+        result = file.read()
     assert functions.generate_diff(path_file1, path_file2) == print(result)
 
+# def test_generate_diff2():
+#     path_file1 = "tests/fixtures/test_gen_diff/file1.yaml"
+#     path_file2 = "tests/fixtures/test_gen_diff/file2.yml"
+#     result_file = "tests/fixtures/test_gen_diff/file2.txt"
+#     result = ''''''
+#     assert functions.generate_diff(path_file1, path_file2) == print(result)
