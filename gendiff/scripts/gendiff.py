@@ -4,7 +4,7 @@
 import argparse
 
 # Import local modules
-from gendiff.functions import generate_diff
+from functions import functions
 
 
 def main():
@@ -19,7 +19,7 @@ def main():
                         help='Get choice for output file format')
 
     args = parser.parse_args()
-    generate_diff(args.first_file, args.second_file)
+    functions.generate_diff(args.first_file, args.second_file)
 
 
 if __name__ == '__main__':
