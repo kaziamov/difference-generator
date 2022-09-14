@@ -3,7 +3,7 @@
 gd-h:
 	poetry run gendiff -h
 mtest:
-	poetry run pytest
+	poetry run pytest -vv
 lint:
 	poetry run flake8 gendiff
 install:
