@@ -9,10 +9,10 @@ jobs:
 
     runs-on: ubuntu-latest
     steps:
-#      - uses: actions/checkout@v2
-#      - uses: actions/setup-python@v2
-#      - run: pip install poetry
-#      - run: make install
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      - run: pip install poetry
+      - run: make install
 #      - run: make lint
 #      - run: make mtest
       - name: Test & publish code coverage
