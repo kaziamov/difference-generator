@@ -1,7 +1,7 @@
 # Gendiff functionality
 
 # Import local modules
-from gendiff.functions import parsing
+from gendiff.functions import parsing, convert
 
 
 def open_file(path_to_file):
@@ -57,7 +57,7 @@ def generate_diff(path_to_file1, path_to_file2, format='json'):
                 result.append(f'- {key}: {dict1[key]}')
                 result.append(f'+ {key}: {dict2[key]}')
 
-    print_diff(result)
+    print(convert.convert_to_json(result))
 
 
 def print_diff(list_):
