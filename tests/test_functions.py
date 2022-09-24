@@ -48,13 +48,13 @@ def test_get_unique_in_set2():
     assert functions.get_unique_in_set2(set1, set2) == result
 
 
-def test_gendiff1():
-    assert functions.generate_diff(_PATH + 'gendiff1_file1.json', _PATH + 'gendiff1_file2.json') == open(_PATH + 'gendiff1_result.txt', "r").read().strip()
-
-
-def test_gendiff2():
-    assert functions.generate_diff(_PATH + 'gendiff2_file1.yaml', _PATH + 'gendiff2_file2.yaml') == open(_PATH + 'gendiff2_result.txt', "r").read().strip()
-
-
-def test_gendiff3():
-    assert functions.generate_diff(_PATH + 'gendiff3_file1.yml', _PATH + 'gendiff3_file2.yml') == open(_PATH + 'gendiff3_result.txt', "r").read().strip()
+# def test_gendiff1():
+#     assert functions.generate_diff(_PATH + 'gendiff1_file1.json', _PATH + 'gendiff1_file2.json') == open(_PATH + 'gendiff1_result.txt', "r").read().strip()
+#
+#
+# def test_gendiff2():
+#     assert functions.generate_diff(_PATH + 'gendiff2_file1.yaml', _PATH + 'gendiff2_file2.yaml') == open(_PATH + 'gendiff2_result.txt', "r").read().strip()
+#
+#
+# def test_gendiff3():
+#     assert functions.generate_diff(_PATH + 'gendiff3_file1.yml', _PATH + 'gendiff3_file2.yml') == open(_PATH + 'gendiff3_result.txt', "r").read().strip()
