@@ -1,7 +1,11 @@
 # Gendiff functionality
 
 # Import local modules
-from gendiff.functions import parsing, convert
+from gendiff.functions import parsing
+# Import build-in modules
+import json
+# Import third-party modules
+import yaml
 
 
 def open_file(path_to_file):
@@ -34,7 +38,7 @@ def get_unique_in_set2(set1, set2):
     return set2 - set1
 
 
-def generate_diff(path_to_file1, path_to_file2, format='json'):
+def generate_diff(path_to_file1, path_to_file2, format='string'):
     """Conveyor for generate diff for two files."""
     dict1, dict2 = tuple(map(open_file, (path_to_file1, path_to_file2)))
     set1, set2 = tuple(map(convert_to_set, (dict1, dict2)))
@@ -57,7 +61,8 @@ def generate_diff(path_to_file1, path_to_file2, format='json'):
                 result.append(f'- {key}: {dict1[key]}')
                 result.append(f'+ {key}: {dict2[key]}')
 
-    print(convert.convert_to_json(result))
+    # print(convert.convert_to_json(result))
+    return result
 
 
 def print_diff(list_):
@@ -65,3 +70,18 @@ def print_diff(list_):
     list_.insert(0, '{')
     list_.append('}')
     print(*list_, sep='\n')
+
+
+def convert_to_yml(document):
+    """Input Python dictionary and convert to yalm"""
+    return yaml.dump(document,
+                     default_flow_style=False,
+                     sort_keys=False)
+
+def convert_to_json(document):
+    """Input Python dictionary and convert to json"""
+    return json.dumps(document,
+                      skipkeys=True,
+                      allow_nan=True,
+                      indent=2,
+                      )
