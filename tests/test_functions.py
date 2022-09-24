@@ -1,4 +1,16 @@
 from gendiff.functions import functions
+import pytest
+from tests.fixtures._paths import _PATH
+
+
+def test_open_file1():
+    assert open(_PATH + 'open1.json')
+
+
+def test_open_file2():
+    with pytest.raises(Exception) as exc:
+        open('not_exist.fantasy')
+    assert 'No such file or directory' in str(exc)
 
 
 def test_convert_to_set():
@@ -36,31 +48,13 @@ def test_get_unique_in_set2():
     assert functions.get_unique_in_set2(set1, set2) == result
 
 
-def test_generate_diff():
-    path_ = 'tests/fixtures/test_gen_diff/1/'
-    path_file1 = path_ + "file1.json"
-    path_file2 = path_ + "file2.json"
-    result_file = path_ + "result.txt"
-    with open(result_file, "r") as file:
-        result = file.read()
-    assert functions.generate_diff(path_file1, path_file2) == print(result)
+def test_gendiff1():
+    assert functions.generate_diff(_PATH + 'gendiff1_file1.json', _PATH + 'gendiff1_file2.json') == open(_PATH + 'gendiff1_result.txt', "r").read().strip()
 
 
-def test_generate_diff2():
-    path_ = 'tests/fixtures/test_gen_diff/2/'
-    path_file1 = path_ + "file1.yaml"
-    path_file2 = path_ + "file2.yaml"
-    result_file = path_ + "result.txt"
-    with open(result_file, "r") as file:
-        result = file.read()
-    assert functions.generate_diff(path_file1, path_file2) == print(result)
+def test_gendiff2():
+    assert functions.generate_diff(_PATH + 'gendiff2_file1.yaml', _PATH + 'gendiff2_file2.yaml') == open(_PATH + 'gendiff2_result.txt', "r").read().strip()
 
 
-def test_generate_diff3():
-    path_ = 'tests/fixtures/test_gen_diff/3/'
-    path_file1 = path_ + "file1.yml"
-    path_file2 = path_ + "file2.yml"
-    result_file = path_ + "result.txt"
-    with open(result_file, "r") as file:
-        result = file.read()
-    assert functions.generate_diff(path_file1, path_file2) == print(result)
+def test_gendiff3():
+    assert functions.generate_diff(_PATH + 'gendiff3_file1.yml', _PATH + 'gendiff3_file2.yml') == open(_PATH + 'gendiff3_result.txt', "r").read().strip()
