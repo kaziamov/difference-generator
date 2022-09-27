@@ -4,7 +4,7 @@
 import argparse
 
 # Import local modules
-from gendiff.functions import functions
+# from gendiff.functions import functions
 
 
 def main():
