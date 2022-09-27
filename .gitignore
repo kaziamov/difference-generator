@@ -1,7 +1,10 @@
 *cache*
 .idea
-dist
+/dist
 .venv
+/venv
 .vim
+.python-version
+.github
 *coverage*
-TODO.md
+*todo.md
