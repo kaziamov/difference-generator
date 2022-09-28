@@ -29,16 +29,18 @@ $ poetry install
 # Usage
 
 ```
-gendiff [-h] [-f FORMAT] first_file second_file
+$ gendiff [-h] [-f FORMAT] first_file second_file
 ```
+[![asciicast](https://asciinema.org/a/5mZfXCHQbYOOlSNgbWBsxto7f.svg)](https://asciinema.org/a/5mZfXCHQbYOOlSNgbWBsxto7f)
 
+***
 For more information use
 ```
-make gd-h
+$ make gd-h
 ```
 or
 ``` 
-poetry run gendiff -h
+$ poetry run gendiff -h
 ```
 
 # Contacts
