@@ -46,24 +46,24 @@ def compare_files(two_dictionaries_in_tuple):
 
     differences = []
     for key in sorted(set1 | set2):
-        
+
         if key in set1 and key in set2:
             value1 = json.dumps(dict1[key])
             value2 = json.dumps(dict2[key])
-            
+
             if dict1[key] == dict2[key]:
                 differences.append(f'    {key}: {value1}')
             else:
                 differences.append(f'  - {key}: {value1}')
                 differences.append(f'  + {key}: {value2}')
-                
+
         elif key in set1:
             value1 = json.dumps(dict1[key])
             differences.append(f'  - {key}: {value1}')
         elif key in set2:
             value2 = json.dumps(dict2[key])
             differences.append(f'  + {key}: {value2}')
-            
+
     return differences
 
 
