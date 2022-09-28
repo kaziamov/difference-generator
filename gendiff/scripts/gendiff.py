@@ -20,8 +20,14 @@ def main():
                         metavar='FORMAT',
                         help='Get choice for output file format')
 
-    # args = parser.parse_args()
-    # functions.generate_diff(args.first_file, args.second_file)
+    args = parser.parse_args()
+    diff = generate_diff(args.first_file, args.second_file)
+    # print(diff)
+
+
+def generate_diff(path_to_file1, path_to_file2):
+    result = compare_files(open_two_files(path_to_file1, path_to_file2))
+    print('{\n' + result + '\n}')
 
 
 def read_and_parse(path_to_file):
@@ -39,11 +45,20 @@ def compare_files(two_dictionaries_in_tuple):
     dict1, dict2 = two_dictionaries_in_tuple
     set1, set2 = set(dict1), set(dict2)
 
-    # differences = []
+    differences = []
     for key in sorted(set1 | set2):
-        if dict1[key] == dict2[key]:
-            pass
-
+        if key in set1 and key in set2:
+            if dict1[key] == dict2[key]:
+                differences.append(f'    {key}: {json.dumps(dict1[key])}')
+            else:
+                differences.append(f'  - {key}: {json.dumps(dict1[key])}')
+                differences.append(f'  + {key}: {json.dumps(dict2[key])}')
+        elif key in set1:
+            differences.append(f'  - {key}: {json.dumps(dict1[key])}')
+        elif key in set2:
+            differences.append(f'  + {key}: {json.dumps(dict2[key])}')
+    
+    return '\n'.join(differences)
 
 if __name__ == '__main__':
     main()
