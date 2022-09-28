@@ -21,13 +21,12 @@ def main():
                         help='Get choice for output file format')
 
     args = parser.parse_args()
-    diff = generate_diff(args.first_file, args.second_file)
-    # print(diff)
+    generate_diff(args.first_file, args.second_file)
 
 
 def generate_diff(path_to_file1, path_to_file2):
     result = compare_files(open_two_files(path_to_file1, path_to_file2))
-    print('{\n' + result + '\n}')
+    print('{\n' + '\n'.join(result) + '\n}')
 
 
 def read_and_parse(path_to_file):
@@ -57,8 +56,8 @@ def compare_files(two_dictionaries_in_tuple):
             differences.append(f'  - {key}: {json.dumps(dict1[key])}')
         elif key in set2:
             differences.append(f'  + {key}: {json.dumps(dict2[key])}')
-    
-    return '\n'.join(differences)
+    return differences
+
 
 if __name__ == '__main__':
     main()
