@@ -14,4 +14,3 @@ def test2():
     with open('tests/fixtures/open_read1.json', 'r') as f:
         data = f.read()
     assert json.loads(data) == result
-
