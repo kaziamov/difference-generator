@@ -2,6 +2,8 @@
 
 gd-h:
 	poetry run gendiff -h
+gd-s:
+	poetry run gendiff tests/fixtures/flat_1.json tests/fixtures/flat_2.json
 mtest:
 	poetry run pytest -vv
 lint:
