@@ -23,8 +23,9 @@ example: show-files test-json test-yaml test-yml
 
 
 
-
 mtest:
+	poetry run pytest --show-capture=stdout --disable-pytest-warnings -v --tb=no
+vtest:
 	poetry run pytest -vv
 lint:
 	poetry run flake8 gendiff

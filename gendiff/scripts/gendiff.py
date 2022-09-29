@@ -50,6 +50,7 @@ def compare_files(two_dictionaries_in_tuple):
             if dict1[key] == dict2[key]:
                 differences.append(f'    {key}: {value1}')
             else:
+                # differences.append(compare_files(dict1[key], dict2[key]))
                 differences.append(f'  - {key}: {value1}')
                 differences.append(f'  + {key}: {value2}')
 

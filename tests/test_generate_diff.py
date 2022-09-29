@@ -20,3 +20,23 @@ def test3():
     file2 = path + 'flat_2.yml'
     filer = path + 'flat_r.txt'
     assert generate_diff(file1, file2) == open(filer, 'r').read()
+    
+def test4():
+    file1 = path + 'tree_1.json'
+    file2 = path + 'tree_2.yml'
+    filer = path + 'tree_r.txt'
+    assert generate_diff(file1, file2) == open(filer, 'r').read()
+    
+    
+def test5():
+    file1 = path + 'tree_1.json'
+    file2 = path + 'tree_2.json'
+    filer = path + 'tree_r.txt'
+    assert generate_diff(file1, file2) == open(filer, 'r').read()
+    
+    
+def test6():
+    file1 = path + 'tree_1.yaml'
+    file2 = path + 'tree_2.yml'
+    filer = path + 'tree_r.txt'
+    assert generate_diff(file1, file2) == open(filer, 'r').read()
