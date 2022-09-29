@@ -26,8 +26,8 @@ def main():
 
 
 def generate_diff(path_to_file1, path_to_file2):
-    result = compare_files(open_two_files(path_to_file1, path_to_file2))
-    return '{\n' + '\n'.join(result) + '\n}'
+    result = '\n'.join(compare_files(open_two_files(path_to_file1, path_to_file2))).replace('"', "").replace("'", "")
+    return '{\n' + result + '\n}'
 
 
 def read_and_parse(path_to_file):
@@ -49,16 +49,20 @@ def compare_files(two_dictionaries_in_tuple):
     for key in sorted(set1 | set2):
 
         if key in set1 and key in set2:
+            value1 = json.dumps(dict1[key])
+            value2 = json.dumps(dict2[key])
             if dict1[key] == dict2[key]:
-                differences.append(f'    {key}: {dict1[key]}')
+                differences.append(f'    {key}: {value1}')
             else:
-                differences.append(f'  - {key}: {dict1[key]}')
-                differences.append(f'  + {key}: {dict2[key]}')
+                differences.append(f'  - {key}: {value1}')
+                differences.append(f'  + {key}: {value2}')
 
         elif key in set1:
-            differences.append(f'  - {key}: {dict1[key]}')
+            value1 = json.dumps(dict1[key])
+            differences.append(f'  - {key}: {value1}')
         elif key in set2:
-            differences.append(f'  + {key}: {dict2[key]}')
+            value2 = json.dumps(dict2[key])
+            differences.append(f'  + {key}: {value2}')
 
     return differences
 
