@@ -7,6 +7,7 @@ import argparse
 import json
 
 # Import local modules
+from gendiff.scripts.parsing import read_and_parse
 
 
 def main():
@@ -28,11 +29,6 @@ def main():
 def generate_diff(path_to_file1, path_to_file2):
     result = '\n'.join(compare_files(open_two_files(path_to_file1, path_to_file2))).replace('"', "").replace("'", "")
     return '{\n' + result + '\n}'
-
-
-def read_and_parse(path_to_file):
-    with open(path_to_file, 'r') as file:
-        return json.load(file)
 
 
 def open_two_files(path_to_file1, path_to_file2):

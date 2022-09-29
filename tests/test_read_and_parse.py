@@ -1,4 +1,4 @@
-from gendiff.scripts.gendiff import read_and_parse
+from gendiff.scripts.parsing import read_and_parse
 from tests.paths import path
 
 def test_1():
