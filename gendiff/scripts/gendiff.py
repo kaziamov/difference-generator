@@ -5,6 +5,7 @@
 # Import build-in modules
 import argparse
 import json
+import collections.abc as coll
 
 # Import local modules
 from gendiff.scripts.parsing import read_and_parse
@@ -27,40 +28,77 @@ def main():
 
 
 def generate_diff(path_to_file1, path_to_file2):
-    result = '\n'.join(compare_files(open_two_files(path_to_file1, path_to_file2))).replace('"', "").replace("'", "")
-    return '{\n' + result + '\n}'
+    gendiff = compare_files(open_two_files(path_to_file1, path_to_file2))
+    return format_diff(gendiff)
+    
 
 
+def format_diff(data):
+    formated_data = '{'
+    for element in data:
+        if type(data[element]) is dict:
+            child = format_diff(data[element])
+            formated_data += f'\n  {element}: {child}'
+        else:
+            formated_data += f'\n  {element}: {json.dumps(data[element])}'
+    formated_data += '\n}'
+    return formated_data.replace('"', '')
+
+
+# def format_diff(data):
+#     formated_data = '{\n'
+#     for element in data:
+#         formated_data += '  '
+#         # print(data[element])
+#         if type(data[element]) is dict:
+#             child = format_diff(data[element])
+#             formated_data += f'{element}: {child}'
+#         else:
+#             formated_data += f'{element}: {json.dumps(data[element])}'
+#         formated_data += '\n'
+#     formated_data += '}\n'
+#     return formated_data.replace('"', '').strip()
+    
 def open_two_files(path_to_file1, path_to_file2):
     dict1 = read_and_parse(path_to_file1)
     dict2 = read_and_parse(path_to_file2)
     return dict1, dict2
 
+def compare_keys():
+    pass
 
 def compare_files(two_dictionaries_in_tuple):
     dict1, dict2 = two_dictionaries_in_tuple
     set1, set2 = set(dict1), set(dict2)
 
-    differences = []
-    for key in sorted(set1 | set2):
-
+    differences = {}
+    types = [list, dict, tuple, set, frozenset]
+    all_keys = sorted(set1 | set2)
+    for key in all_keys:
         if key in set1 and key in set2:
-            value1 = json.dumps(dict1[key])
-            value2 = json.dumps(dict2[key])
             if dict1[key] == dict2[key]:
-                differences.append(f'    {key}: {value1}')
+                if type(dict1[key]) in types:
+                    child = compare_files((dict1[key], dict2[key]))
+                    differences[f'  {key}'] = child
+                    # differences.append({f'    {key}': child})
+                else:
+                    differences[f'  {key}'] = dict1[key]
+                    # differences.append({f'    {key}': dict1[key]})
+            elif type(dict1[key]) in types and type(dict2[key]) in types:
+                child = compare_files((dict1[key], dict2[key]))
+                differences[f'  {key}'] = child
+                # differences.append({f'    {key}': child})
             else:
-                # differences.append(compare_files(dict1[key], dict2[key]))
-                differences.append(f'  - {key}: {value1}')
-                differences.append(f'  + {key}: {value2}')
-
+                differences[f'- {key}'] = dict1[key]
+                differences[f'+ {key}'] = dict2[key]
+                # differences.append({f'  - {key}': dict1[key]})
+                # differences.append({f'  + {key}': dict2[key]})
         elif key in set1:
-            value1 = json.dumps(dict1[key])
-            differences.append(f'  - {key}: {value1}')
+            differences[f'- {key}'] = dict1[key]
+            # differences.append({f'  - {key}': dict1[key]})
         elif key in set2:
-            value2 = json.dumps(dict2[key])
-            differences.append(f'  + {key}: {value2}')
-
+            differences[f'+ {key}'] = dict2[key]
+            # differences.append({f'  + {key}': dict2[key]})
     return differences
 
 
