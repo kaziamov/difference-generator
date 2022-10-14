@@ -27,7 +27,6 @@ def test4():
     filer = path + 'tree_r.txt'
     assert generate_diff(file1, file2) == open(filer, 'r').read()
     
-    
 def test5():
     file1 = path + 'tree_1.json'
     file2 = path + 'tree_2.json'
