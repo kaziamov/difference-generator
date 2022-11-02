@@ -27,8 +27,9 @@ def main():
 
 
 def generate_diff(path_to_file1, path_to_file2):
-    gendiff = compare_files(open_two_files(path_to_file1, path_to_file2))
-    return format_diff(gendiff)
+    # gendiff = 
+    return compare_files(read_and_parse(path_to_file1), read_and_parse(path_to_file2))
+    # return format_diff(gendiff)
     
 
 def format_diff(data, tabs=2):
@@ -51,31 +52,29 @@ def open_two_files(path_to_file1, path_to_file2):
     return dict1, dict2
 
 
-def compare_files(two_dictionaries_in_tuple):
-    dict1, dict2 = two_dictionaries_in_tuple
-    set1, set2 = set(dict1), set(dict2)
-
-    differences = {}
+def is_child(first, second):
     types = [list, dict, tuple, set, frozenset]
+    return type(first) in types and type(second) in types
+
+
+def compare_files(dict1, dict2):
+    set1, set2 = set(dict1), set(dict2)
     all_keys = sorted(set1 | set2)
-    for key in all_keys:
-        if key in set1 and key in set2:
-            if dict1[key] == dict2[key]:
-                if type(dict1[key]) in types:
-                    child = compare_files((dict1[key], dict2[key]))
-                    differences[f'  {key}'] = child
-                else:
-                    differences[f'  {key}'] = dict1[key]
-            elif type(dict1[key]) in types and type(dict2[key]) in types:
-                child = compare_files((dict1[key], dict2[key]))
-                differences[f'  {key}'] = child
+    differences = []
+    for index, key in enumerate(all_keys):
+        if key in dict1 and key not in dict2:
+            d = {'id': index, 'status': 'first_only', 'key': key, 'value': dict1[key]}
+        elif key in dict2 and key not in dict1:
+            d = {'id': index, 'status': 'second_only', 'key': key, 'value': dict2[key]}
+        elif dict1[key] == dict2[key]:
+            
+            d = {'id': index, 'status': 'same', 'key': key, 'value': dict1[key]}
+        else:
+            if is_child(dict1[key], dict2[key]):
+                d = {'id': index, 'status': 'child', 'key': key, 'value': compare_files(dict1[key], dict2[key])}
             else:
-                differences[f'- {key}'] = dict1[key]
-                differences[f'+ {key}'] = dict2[key]
-        elif key in set1:
-            differences[f'- {key}'] = dict1[key]
-        elif key in set2:
-            differences[f'+ {key}'] = dict2[key]
+                d = {'id': index, 'status': 'not_same', 'key': key, 'value': dict1[key], 'value2': dict2[key]}
+        differences.append(d)
     return differences
 
 
