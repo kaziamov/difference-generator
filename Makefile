@@ -2,24 +2,19 @@
 
 gd-h:
 	poetry run gendiff -h
-gd-s:
+gd-flat:
 	poetry run gendiff tests/fixtures/flat_1.json tests/fixtures/flat_2.json
+gd-tree:
+	poetry run gendiff tests/fixtures/tree_1.json tests/fixtures/tree_2.yml
 
 
-show-files:
-	echo '\n------------------------- FILES FOR EXAMPLE ------------------------ ' && \
-	echo '\n---------------------------- FIRST FILE ---------------------------- ' && \
-	cat tests/fixtures/flat_1.json && \
-	echo '\n---------------------------- SECOND FILE --------------------------- ' && \
-	cat tests/fixtures/flat_2.json && \
-	echo '\n---------------------- GENERATE DIFFERENCES  -----------------------'
 test-json:
 	gendiff tests/fixtures/flat_1.json tests/fixtures/flat_2.json
 test-yaml:
 	gendiff ./tests/fixtures/flat_1.yaml ./tests/fixtures/flat_2.yaml
 test-yml:
 	gendiff tests/fixtures/flat_1.yml tests/fixtures/flat_2.json
-example: show-files test-json test-yaml test-yml
+example: test-json test-yaml test-yml
 
 
 
@@ -30,6 +25,7 @@ vtest:
 lint:
 	poetry run flake8 gendiff
 check: mtest lint
+push: check
 
 
 install:
