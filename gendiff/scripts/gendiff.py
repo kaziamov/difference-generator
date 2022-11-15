@@ -5,6 +5,7 @@
 # Import build-in modules
 import argparse
 import json
+from re import L
 
 # Import local modules
 from gendiff.scripts.parsing import read_and_parse
@@ -27,23 +28,73 @@ def main():
 
 
 def generate_diff(path_to_file1, path_to_file2):
-    # gendiff = 
-    return compare_files(read_and_parse(path_to_file1), read_and_parse(path_to_file2))
-    # return format_diff(gendiff)
-    
+    gendiff = compare_files(read_and_parse(path_to_file1), read_and_parse(path_to_file2))
+    return format_diff(gendiff)
 
-def format_diff(data, tabs=2):
-    formated_data = '{\n'
-    for element in data:
-        formated_data += ' ' * tabs
-        if type(data[element]) is dict:
-            child = format_diff(data[element], tabs=tabs+4)
-            formated_data += f'{element}: {child}'
-        else:
-            formated_data += f'{element}: {json.dumps(data[element])}'
-        formated_data += '\n'
-    formated_data += ' ' * (tabs - 2) + '}'
-    return formated_data.replace('"', '')
+
+def format_str(key, value, tabs=4, status=' '):
+    tabs_str = [' '] * (tabs - 2)
+    tabs_str.extend([status, ' '])
+    return '{}{}: {}'.format(''.join(tabs_str), key, value)
+
+
+def add_brackets(list_):
+    result = list_.copy()
+    result.insert(0, '{')
+    result.insert(-1, '}')
+    return result
+
+def format_child(dict_, tabs=4):
+    formated_lines = []
+    for key, value in dict_.items():
+        if type(value) is dict:
+            value = format_child(value, tabs + 4)
+        formated_lines.append(format_str(key, value, tabs))
+    formated_lines.append(' ' * (tabs - 4) + '}')
+    return '\n'.join(formated_lines)
+
+
+def format_diff(data, tabs=0):
+    formated_lines = ['{']
+    for line in data:
+        li = line['value']
+        if line['status'] == 'first_only':
+            if type(line['value']) is dict:
+                li = format_child(li, tabs + 2)
+            else:
+                li = json.dumps(li)
+            formated_lines.append(format_str(line['key'], li, tabs, '-'))
+
+        elif line['status'] == 'second_only':
+            if type(line['value']) is dict:
+                li = format_child(line['value'], tabs + 2)
+            else:
+                li = json.dumps(li)
+            formated_lines.append(format_str(line['key'], li, tabs, '+'))
+
+        elif line['status'] == 'same':
+            if type(line['value']) is dict:
+                li = format_child(line['value'], tabs + 4)
+            else:
+                li = json.dumps(li)
+            formated_lines.append(format_str(line['key'], li, tabs))
+
+        elif line['status'] == 'not_same':
+            v2 = line['value2']
+            if type(line['value']) is dict:
+                li = format_child(line['value'], tabs + 4)
+            elif type(line['value2']) is dict:
+                v2 = format_child(line['value2'], tabs + 4)
+            formated_lines.append(format_str(line['key'], li, tabs, '-'))
+            formated_lines.append(format_str(line['key'], v2, tabs, '+'))
+            
+        elif line['status'] == 'child':
+            format_child_ = format_diff(li, tabs+4)
+            formated_lines.append(format_str(line['key'], format_child_, tabs))
+
+    formated_lines.append(' ' * (tabs - 4) + '}')
+  
+    return '\n'.join(formated_lines)
 
 
 def open_two_files(path_to_file1, path_to_file2):
