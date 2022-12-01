@@ -17,7 +17,6 @@ test-yml:
 example: test-json test-yaml test-yml
 
 
-
 mtest:
 	poetry run pytest --show-capture=stdout --disable-pytest-warnings -v --tb=no
 vtest:
