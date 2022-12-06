@@ -5,7 +5,5 @@
 .venv
 /venv
 .vim
-.python-version
 .github
 *coverage*
-*todo.md
