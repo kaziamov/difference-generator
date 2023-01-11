@@ -1,6 +1,11 @@
 from gendiff.scripts.parsing import get_format
-from tests.paths import path
+import pytest
 
-def test1():
-    assert get_format('path/data.json') == '.json'
-    assert get_format('./.gitignore') == ""
+
+@pytest.mark.parametrize("input_value, expected", [
+                        ('file.txt', 'txt'),
+                        ('file.json', 'json'),
+                        ('file.yaml', 'yaml'),
+                    ])
+def test_file_format(input_value, expected):
+    assert get_format(input_value) == expected

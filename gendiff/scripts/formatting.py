@@ -28,10 +28,7 @@ def format_diff(tree, level=0):
         f.append('  - {}: {}\n'.format(key, value1))
 
     if tree['status'] == 'second_only':
-        if type(value2) is list:
-            value2 = format_diff(value2, level + 1)
-        else:
-            value2 = json.dumps(value2)
+
         f.append('  + {}: {}\n'.format(key, value2))
 
     if tree['status'] == 'same':
@@ -58,3 +55,14 @@ def format_diff(tree, level=0):
     # f.append(get_indent(level) + '}')
     result = ''.join(f).replace('"', '')
     return result
+
+def convert_to_str(line, level):
+    if not isinstance(line, dict):
+        return json.dumps(line)
+    else:
+        result = ''
+        indent = get_indent(level + 1)
+        for data in line:
+            value = convert_to_str(line[data], level + 1)
+            result += f'\n{indent}    {data}: {value}'
+        return f'{{{result}\n{indent}}}'

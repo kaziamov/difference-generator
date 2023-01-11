@@ -14,7 +14,8 @@ from gendiff.scripts.formatting import format_diff
 
 def main():
     """Сreate command-line interface for program"""
-    parser = argparse.ArgumentParser(prog='gendiff', description='Program for compare two files and print difference.')
+    parser = argparse.ArgumentParser(
+        prog='gendiff', description='Program for compare two files and print difference.')
     parser.add_argument('first_file',
                         help='First file to compare')
     parser.add_argument('second_file',
@@ -30,8 +31,9 @@ def main():
 
 def generate_diff(path_to_file1, path_to_file2):
     """Generate tree of difference from two dictionaries."""
-    gendiff = {'status': 'root',
-               'child': compare_files(read_and_parse(path_to_file1), read_and_parse(path_to_file2))
+    gendiff = {
+        'status': 'root',
+        'child': compare_files(read_and_parse(path_to_file1), read_and_parse(path_to_file2))
     }
     result = format_diff(gendiff)
     return result
@@ -71,21 +73,17 @@ def compare_files(dict1, dict2):
                  }
         elif type(dict1[key]) == dict and type(dict2[key]) == dict:
             d = {'id': index,
-                    'status': 'child',
-                    'key': key,
-                    'child': compare_files(dict1[key], dict2[key])
-                    }
+                 'status': 'child',
+                 'key': key,
+                 'child': compare_files(dict1[key], dict2[key])
+                 }
         else:
             d = {'id': index,
-                    'status': 'not_same',
-                    'key': key,
-                    'value1': dict1[key],
-                    'value2': dict2[key]
-                    }
+                 'status': 'not_same',
+                 'key': key,
+                 'value1': dict1[key],
+                 'value2': dict2[key]
+                 }
         differences.append(d)
 
     return differences
-
-
-# if __name__ == '__main__':
-#     main()

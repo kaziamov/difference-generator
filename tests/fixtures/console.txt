@@ -1,3 +1,0 @@
-batman:
-  comics: 1989
-venom: 1

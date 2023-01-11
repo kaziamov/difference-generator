@@ -1,3 +1,5 @@
+
+
 # Import third-patry modules
 import yaml
 try:
@@ -14,7 +16,7 @@ from pathlib import PurePosixPath
 
 def get_format(file):
     """Return suffix of file."""
-    return PurePosixPath(file).suffix
+    return PurePosixPath(file).suffix[1:]
 
 
 def read_and_parse(path_to_file):
@@ -23,10 +25,9 @@ def read_and_parse(path_to_file):
         'json': load_json,
         'yaml': load_yaml,
         'yml': load_yaml,
-        'error': make_raise,
     }
-    format = get_format(path_to_file)
-    action = load_options.get(format[1:], 'error')
+    format_ = get_format(path_to_file)
+    action = load_options.get(format_, make_raise)
     return action(path_to_file)
 
 
