@@ -44,10 +44,10 @@ $ poetry run gendiff -h
 
 # Contacts
 
-**Twitter**: [@kazyamov](https://twitter.com/kazyamov)
+**Twitter**: [@kaziamov_](https://twitter.com/kaziamov_)
 
 **LinkedIn**: [Ilia Kaziamov](https://www.linkedin.com/in/kaziamov/)
 
-**Telegram**: [@kazyamov](https://t.me/kazyamov)
+**Telegram**: [@kaziamov](https://t.me/kaziamov)
 
 **Instagram**: [@kazyamov](https://instagram.com/kazyamov)
