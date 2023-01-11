@@ -14,5 +14,5 @@ jobs:
       - run: pip install poetry
       - run: make install
       - run: make mtest
-      - run: make gd-h
+      - run: make gendiff-help
       - run: make lint
