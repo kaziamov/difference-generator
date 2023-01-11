@@ -1,68 +1,82 @@
 import json
 
-def get_indent(level, spaces_per_level=4):
-    """Return whitespaces like intend"""
-    return ' ' * spaces_per_level * level
+
+def _convert_to_string(data):
+    if type(data) is bool or data is None:
+        return json.dumps(data)
+    elif type(data) is dict:
+        return map(lambda x: f'{x}')
+    else:
+        return data
 
 
-def format_diff(tree, level=0):
-    """Formatting tree of differences from dictionary."""
-    f = []
-    key = tree.get('key')
-    value = tree.get('value')
-    value1 = tree.get('value1')
-    value2 = tree.get('value2')
-    child = tree.get('child')
+def _get_intend(level=0, spaces_count=4):
+    if not level:
+        return ''
+    return ' ' * spaces_count * level
 
-    if tree['status'] == 'root':
-        f.append('{\n')
-        result = list(map(lambda x: format_diff(x, level + 1), child))
-        f.extend(result)
-        f.append('}')
 
-    if tree['status'] == 'first_only':
-        if type(value1) is list:
-            value1 = format_diff(value1, level + 1)
-        else:
-            value1 = json.dumps(value1)
-        f.append('  - {}: {}\n'.format(key, value1))
+def _get_brakes(data):
+    return '{\n' + data + '\n}'
 
-    if tree['status'] == 'second_only':
 
-        f.append('  + {}: {}\n'.format(key, value2))
-
-    if tree['status'] == 'same':
-        if type(value) is list:
-            value = format_diff(value, level + 1)
-        else:
-            value = json.dumps(value)
-        f.append('    {}: {}\n'.format(key, value))
-
-    if tree['status'] == 'not_same':
-        if type(value1) is list:
-            value1 = format_diff(value1, level + 1)
-        elif type(value2) is list:
-            value2 = format_diff(value2, level + 1)
-        f.append('  - {}: {}\n'.format(key, value1))
-        f.append('  + {}: {}\n'.format(key, value2))
-
-    if tree['status'] == 'child':
-        f.append('{\n')
-        result = list(map(lambda x: format_diff(x, level + 1), child))
-        f.extend(result)
-        f.append('}\n')
-
-    # f.append(get_indent(level) + '}')
-    result = ''.join(f).replace('"', '')
+def formatting_tree(tree):
+    result = _format_node_(tree)
     return result
 
-def convert_to_str(line, level):
-    if not isinstance(line, dict):
-        return json.dumps(line)
-    else:
-        result = ''
-        indent = get_indent(level + 1)
-        for data in line:
-            value = convert_to_str(line[data], level + 1)
-            result += f'\n{indent}    {data}: {value}'
-        return f'{{{result}\n{indent}}}'
+
+def _format_node_(node, level=0):
+    # print(f'node is {node}')
+    intend = _get_intend(level=level)
+    # print(f'intend is "{intend}", and level is {level}')
+
+    key = node.get('key')
+    # print(f'key is {key}')
+    status = node.get('status')
+    # print(f'status is {status}')
+    childs = node.get('child')
+    # print(f'child is {childs}')
+
+    value = _convert_to_string(node.get('value'))
+    # print(f'value is {value}')
+    value1 = _convert_to_string(node.get('value1'))
+    # print(f'value1 is {value1}')
+    value2 = _convert_to_string(node.get('value2'))
+    # print(f'value2 is {value2}')
+
+    if status == 'root':
+        print('root started')
+        strings = [_format_node_(child, level=0) for child in childs]
+        print(f'root strings is {strings}')
+        result = _get_brakes(
+            '\n'.join(strings)
+        )
+        # print(f'root result is {result}')
+
+    if status == 'added':
+        result = f'{intend}  + {key}: {value}'
+        # print(f'added result is {result}')
+
+    if node['status'] == 'removed':
+        result = f'{intend}  - {key}: {value}'
+        # print(f'removed result is {result}')
+
+    if status == 'updated':
+        strings = [f'{intend}  - {key}: {value1}',
+                   f'{intend}  + {key}: {value2}']
+        result = '\n'.join(strings)
+        # print(f'updated result is {result}')
+
+    if status == 'same':
+        result = f'{intend}    {key}: {value}'
+        # print(f'same result is {result}')
+
+    if status == 'child':
+        strings = [_format_node_(child, level + 1) for child in childs]
+        # print(f'child strings is {strings}')
+        result = '\n'.join(strings)
+        # print(f'child result is {result}')
+
+    # print(f'result is {result}')
+    # print('______________________')
+    return result

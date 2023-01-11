@@ -45,3 +45,11 @@ def load_yaml(path_to_file):
 
 def make_raise(*args):
     raise "Can't read because file type is not supported"
+
+
+def open_and_load(file1, file2):
+    with open(file1, 'r') as f1:
+        data1 = json.load(f1)
+    with open(file2, 'r') as f2:
+        data2 = json.load(f2)
+    return data1, data2

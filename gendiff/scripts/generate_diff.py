@@ -4,12 +4,12 @@
 
 # Import build-in modules
 import argparse
-import json
-from re import L
+# import json
+# from re import L
 
 # Import local modules
 from gendiff.scripts.parsing import read_and_parse
-from gendiff.scripts.formatting import format_diff
+from gendiff.scripts.formatting import formatting_tree
 
 
 def main():
@@ -31,11 +31,8 @@ def main():
 
 def generate_diff(path_to_file1, path_to_file2):
     """Generate tree of difference from two dictionaries."""
-    gendiff = {
-        'status': 'root',
-        'child': compare_files(read_and_parse(path_to_file1), read_and_parse(path_to_file2))
-    }
-    result = format_diff(gendiff)
+    gendiff = _create_root(read_and_parse(path_to_file1), read_and_parse(path_to_file2))
+    result = formatting_tree(gendiff)
     return result
 
 
@@ -46,44 +43,25 @@ def open_two_files(path_to_file1, path_to_file2):
     return dict1, dict2
 
 
-def compare_files(dict1, dict2):
-    """Make compare between two dictionaries."""
-    all_keys = sorted((dict1 | dict2).keys())
-    types = [list, dict, tuple, set, frozenset]
-    differences = []
-    for index, key in enumerate(all_keys):
-        if key not in dict2:
-            d = {'id': index,
-                 'status': 'first_only',
-                 'key': key,
-                 'value1': dict1[key]
-                 }
-        elif key not in dict1:
-            d = {'id': index,
-                 'status': 'second_only',
-                 'key': key,
-                 'value2': dict2[key]
-                 }
-        elif dict1[key] == dict2[key]:
+def _create_root(data1, data2):
+    return {'status': 'root', 'child': make_diff(data1, data2)}
 
-            d = {'id': index,
-                 'status': 'same',
-                 'key': key,
-                 'value': dict1[key]
-                 }
-        elif type(dict1[key]) == dict and type(dict2[key]) == dict:
-            d = {'id': index,
-                 'status': 'child',
-                 'key': key,
-                 'child': compare_files(dict1[key], dict2[key])
-                 }
+
+def make_diff(data1, data2):
+    keys = sorted(data1.keys() | data2.keys())
+    result = []
+    for key in keys:
+        status = {'key': key}
+        if key not in data2:
+            status.update({'status': 'removed', 'value': data1[key]})
+        elif key not in data1:
+            status.update({'status': 'added', 'value': data2[key]})
+        elif type(data1[key]) == dict and type(data2[key]) == dict:
+            childs_diff = make_diff(data1[key], data2[key])
+            status.update({'status': 'child', 'child': childs_diff})
+        elif data1[key] == data2[key]:
+            status.update({'status': 'same', 'value': data1[key]})
         else:
-            d = {'id': index,
-                 'status': 'not_same',
-                 'key': key,
-                 'value1': dict1[key],
-                 'value2': dict2[key]
-                 }
-        differences.append(d)
-
-    return differences
+            status.update({'status': 'updated', 'value1': data1[key], 'value2': data2[key]})
+        result.append(status)
+    return result
