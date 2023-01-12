@@ -6,7 +6,7 @@
 
 # Description
 
-Program for compare two files and print difference. 
+Program for compare two files and print difference.
 
 Compatibility with JSON and YAML files.
 
@@ -20,7 +20,7 @@ And install dependencies
 $ make install
 ```
 
-or 
+or
 
 ```
 $ poetry install
@@ -31,14 +31,16 @@ $ poetry install
 ```
 $ gendiff [-h] [-f FORMAT] first_file second_file
 ```
-[![asciicast](https://asciinema.org/a/2IYRjDVrxSTCjOTv7sRxDyKnx.svg)](https://asciinema.org/a/2IYRjDVrxSTCjOTv7sRxDyKnx)
+[![asciicast](https://asciinema.org/a/sfpmH9kdXtMml01WkNymhUOJW.svg)](https://asciinema.org/a/sfpmH9kdXtMml01WkNymhUOJW)
+[![asciicast](https://asciinema.org/a/lz1z7FWW8Jr1ySgrMyqHlkzhZ.svg)](https://asciinema.org/a/lz1z7FWW8Jr1ySgrMyqHlkzhZ)
+
 ***
 For more information use
 ```
 $ make gd-h
 ```
 or
-``` 
+```
 $ poetry run gendiff -h
 ```
 
