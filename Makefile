@@ -1,9 +1,13 @@
 #Makefile
 
 gendiff-flat:
-	gendiff tests/fixtures/flat/flat_1.yaml tests/fixtures/flat/flat_2.json
+	gendiff -f plain tests/fixtures/flat/flat_1.yaml tests/fixtures/flat/flat_2.json
 gendiff-tree:
-	gendiff ./tests/fixtures/tree/tree_1.yml ./tests/fixtures/tree/tree_2.json
+	gendiff --format stylish ./tests/fixtures/tree/tree_1.yml ./tests/fixtures/tree/tree_2.json
+gendiff-example-with-absolute-path-and-stylish-output-format-for-flat-file:
+	gendiff --format stylish /home/ilia/projects/hexlet/python-project-50/tests/fixtures/tree/tree_1.yml /home/ilia/projects/hexlet/python-project-50/tests/fixtures/tree/tree_2.json
+gendiff-example-with-relative-path-and-plain-output-format-for-tree-file:
+	gendiff --format plain ./tests/fixtures/tree/tree_1.yml ./tests/fixtures/tree/tree_2.json
 example: gendiff-flat gendiff-tree
 
 
