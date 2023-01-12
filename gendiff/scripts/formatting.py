@@ -1,7 +1,9 @@
+# Import build-in modules
 import json
 
 
 def _convert_to_string(data, indent):
+    """Convert data to string format"""
     if type(data) is bool or data is None:
         return json.dumps(data)
     elif type(data) is dict:
@@ -19,21 +21,25 @@ def _convert_to_string(data, indent):
 
 
 def _get_indent(level=0, spaces_count=4):
+    """Get indent consist of whitespaces"""
     if not level:
         return ''
     return ' ' * spaces_count * level
 
 
 def _get_brakes(data, indent):
+    """Add brakes to string"""
     return '{\n' + data + '\n' + indent + '}'
 
 
 def formatting_tree(tree):
+    """Format tree with selected style"""
     result = _format_node_(tree)
     return result
 
 
 def _format_node_(node, level=0):
+    """Format tree childs"""
     indent = _get_indent(level=level)
 
     key = node.get('key')

@@ -1,11 +1,7 @@
 #!/usr/bin/env python
 
-# Import third-party modules
-
 # Import build-in modules
 import argparse
-# import json
-# from re import L
 
 # Import local modules
 from gendiff.scripts.parsing import read_and_parse
