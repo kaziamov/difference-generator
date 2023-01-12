@@ -11,24 +11,26 @@ from gendiff.scripts.formatting import format_tree
 def main():
     """Сreate command-line interface for program"""
     parser = argparse.ArgumentParser(
-        prog='gendiff', description='Program for compare two files and print difference.')
+        prog='gendiff', description='Program for compare two files and print difference. Supported file types: JSON and YAML/YML')
     parser.add_argument('first_file',
                         help='First file to compare')
     parser.add_argument('second_file',
                         help='Second file to compare')
     parser.add_argument('-f', '--format',
                         metavar='FORMAT',
-                        help='Get choice for output file format')
+                        default='stylish',
+                        choices=['stylish', 'plain'],
+                        help='Format style to output ("stylish" by default)')
 
     args = parser.parse_args()
-    diff = generate_diff(args.first_file, args.second_file)
+    diff = generate_diff(args.first_file, args.second_file, args.format)
     print(diff)
 
 
-def generate_diff(path_to_file1, path_to_file2):
+def generate_diff(path_to_file1, path_to_file2, style="stylish"):
     """Generate tree of difference from two dictionaries."""
     gendiff = _create_root(read_and_parse(path_to_file1), read_and_parse(path_to_file2))
-    result = format_tree(gendiff, style="stylish")
+    result = format_tree(gendiff, style)
     return result
 
 
