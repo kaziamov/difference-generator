@@ -31,8 +31,10 @@ $ poetry install
 ```
 $ gendiff [-h] [-f FORMAT] first_file second_file
 ```
+
+
 [![asciicast](https://asciinema.org/a/sfpmH9kdXtMml01WkNymhUOJW.svg)](https://asciinema.org/a/sfpmH9kdXtMml01WkNymhUOJW)
-[![asciicast](https://asciinema.org/a/lz1z7FWW8Jr1ySgrMyqHlkzhZ.svg)](https://asciinema.org/a/lz1z7FWW8Jr1ySgrMyqHlkzhZ)
+[![asciicast](https://asciinema.org/a/gaDJ1RDnuJ4kt5RA78Y6Nq4XU.svg)](https://asciinema.org/a/gaDJ1RDnuJ4kt5RA78Y6Nq4XU)
 
 ***
 For more information use
