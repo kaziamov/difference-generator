@@ -40,8 +40,8 @@ def _format_node_(node, level=0):
     status = node.get('status')
     childs = node.get('child')
 
-    value = _convert_to_string(node.get('value'), indent=_get_indent(level+1))
-    value2 = _convert_to_string(node.get('value2'), indent=_get_indent(level+1))
+    value = _convert_to_string(node.get('value'), indent=_get_indent(level + 1))
+    value2 = _convert_to_string(node.get('value2'), indent=_get_indent(level + 1))
 
     if status == 'root':
         strings = [_format_node_(child, level=0) for child in childs]
