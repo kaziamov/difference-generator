@@ -8,6 +8,6 @@ def test_generate_diff_flat_files(file1, file2, expected):
     assert generate_diff(file1, file2) == expected
 
 
-# @pytest.mark.parametrize("file1, file2, expected", tree_fixtures)
-# def test_generate_diff_tree_files(file1, file2, expected):
-#     assert generate_diff(file1, file2) == expected
+@pytest.mark.parametrize("file1, file2, expected", tree_fixtures)
+def test_generate_diff_tree_files(file1, file2, expected):
+    assert generate_diff(file1, file2) == expected
