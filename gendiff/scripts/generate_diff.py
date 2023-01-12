@@ -5,7 +5,7 @@ import argparse
 
 # Import local modules
 from gendiff.scripts.parsing import read_and_parse
-from gendiff.scripts.formatting import formatting_tree
+from gendiff.scripts.formatting import format_tree
 
 
 def main():
@@ -28,7 +28,7 @@ def main():
 def generate_diff(path_to_file1, path_to_file2):
     """Generate tree of difference from two dictionaries."""
     gendiff = _create_root(read_and_parse(path_to_file1), read_and_parse(path_to_file2))
-    result = formatting_tree(gendiff)
+    result = format_tree(gendiff, style="stylish")
     return result
 
 
