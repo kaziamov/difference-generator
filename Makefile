@@ -1,12 +1,10 @@
 #Makefile
 
-test-json:
-	gendiff tests/fixtures/flat_1/flat_1.json tests/fixtures/flat_2/flat_2.json
-test-yaml:
-	gendiff ./tests/fixtures/flat_1.yaml ./tests/fixtures/flat_2.yaml
-test-yml:
-	gendiff tests/fixtures/flat_1.yml tests/fixtures/flat_2.json
-example: test-json test-yaml test-yml
+gendiff-flat:
+	gendiff tests/fixtures/flat/flat_1.yaml tests/fixtures/flat/flat_2.json
+gendiff-tree:
+	gendiff ./tests/fixtures/tree/tree_1.yml ./tests/fixtures/tree/tree_2.json
+example: gendiff-flat gendiff-tree
 
 
 gendiff-help:
@@ -20,6 +18,7 @@ lint:
 	poetry run flake8 gendiff
 check: mtest lint
 push: check
+	git push
 
 
 install:
