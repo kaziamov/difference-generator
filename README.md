@@ -35,6 +35,7 @@ $ gendiff [-h] [-f FORMAT] first_file second_file
 
 [![asciicast](https://asciinema.org/a/sfpmH9kdXtMml01WkNymhUOJW.svg)](https://asciinema.org/a/sfpmH9kdXtMml01WkNymhUOJW)
 [![asciicast](https://asciinema.org/a/gaDJ1RDnuJ4kt5RA78Y6Nq4XU.svg)](https://asciinema.org/a/gaDJ1RDnuJ4kt5RA78Y6Nq4XU)
+[![asciicast](https://asciinema.org/a/nNvJTIDBlkPOfHUbHfmlfR7Nl.svg)](https://asciinema.org/a/nNvJTIDBlkPOfHUbHfmlfR7Nl)
 
 ***
 For more information use
