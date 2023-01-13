@@ -1,4 +1,5 @@
-from gendiff.scripts import generate_diff
+from gendiff.scripts import gendiff
 
-if __name__ == "__main__":
-    generate_diff.generate_diff()
+
+def main(file1, file2):
+    return gendiff.generate_diff(file1, file2)

@@ -21,7 +21,6 @@ def main():
                         default='stylish',
                         choices=get_formats(),
                         help='Format style to output ("stylish" by default)')
-
     args = parser.parse_args()
     diff = generate_diff(args.first_file, args.second_file, args.format)
     print(diff)
@@ -29,7 +28,8 @@ def main():
 
 def generate_diff(path_to_file1, path_to_file2, style="stylish"):
     """Generate tree of difference from two dictionaries."""
-    gendiff = _create_root(read_and_parse(path_to_file1), read_and_parse(path_to_file2))
+    gendiff = _create_root(read_and_parse(path_to_file1),
+                           read_and_parse(path_to_file2))
     result = format_tree(gendiff, style)
     return result
 

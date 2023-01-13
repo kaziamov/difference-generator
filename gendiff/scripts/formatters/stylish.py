@@ -2,7 +2,7 @@
 import json
 
 
-def _convert_to_string(data, indent):
+def _convert_to_str(data, indent):
     """Convert data to string format"""
     if type(data) is bool or data is None:
         return json.dumps(data)
@@ -12,7 +12,7 @@ def _convert_to_string(data, indent):
             key = x
             value = y
             if type(y) is dict:
-                value = _convert_to_string(y, f'    {indent}')
+                value = _convert_to_str(y, f'    {indent}')
             formatted_line = f'{indent}    {key}: {value}'
             formatted_dict.append(formatted_line)
         return '{\n' + '\n'.join(formatted_dict) + '\n' + indent + '}'
@@ -40,8 +40,8 @@ def _format_node_(node, level=0):
     status = node.get('status')
     childs = node.get('child')
 
-    value = _convert_to_string(node.get('value'), indent=_get_indent(level + 1))
-    value2 = _convert_to_string(node.get('value2'), indent=_get_indent(level + 1))
+    value = _convert_to_str(node.get('value'), indent=_get_indent(level + 1))
+    value2 = _convert_to_str(node.get('value2'), indent=_get_indent(level + 1))
 
     if status == 'root':
         strings = [_format_node_(child, level=0) for child in childs]

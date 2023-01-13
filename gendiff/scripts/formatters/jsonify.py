@@ -33,7 +33,9 @@ def _jsonify_tree_(tree):
         result.update({key: {"status": "removed", "value": value}})
 
     if status == 'updated':
-        result.update({key: {"status": status, "old_value": value, "new_value": value2}})
+        result.update({key: {"status": status,
+                             "old_value": value,
+                             "new_value": value2}})
 
     if status == 'same':
         result.update({key: {"status": "same", "value": value}})
