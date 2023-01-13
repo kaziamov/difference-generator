@@ -1,8 +1,9 @@
 import os
-import pytest
+# import pytest
 import json
 
 from gendiff.scripts.parsing import read_and_parse
+
 
 def fixtures_path(path):
     return os.path.join(os.path.dirname(__file__), 'fixtures/', path, '{}').format
@@ -11,8 +12,6 @@ def fixtures_path(path):
 flat_dir = fixtures_path('flat/')
 tree_dir = fixtures_path('tree/')
 expected_dir = fixtures_path('expected/')
-
-
 
 #  FLAT
 
