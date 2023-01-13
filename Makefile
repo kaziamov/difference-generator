@@ -1,7 +1,7 @@
 #Makefile
 
 gendiff-flat:
-	gendiff -f plain tests/fixtures/flat/flat_1.yaml tests/fixtures/flat/flat_2.json
+	gendiff -f json tests/fixtures/flat/flat_1.yaml tests/fixtures/flat/flat_2.json
 gendiff-tree:
 	gendiff --format stylish ./tests/fixtures/tree/tree_1.yml ./tests/fixtures/tree/tree_2.json
 gendiff-example-with-absolute-path-and-stylish-output-format-for-flat-file:
