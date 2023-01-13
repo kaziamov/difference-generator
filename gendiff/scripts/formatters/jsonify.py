@@ -2,17 +2,6 @@
 import json
 
 
-# def _convert_to_string(data):
-#     """Convert data to string format"""
-#     if type(data) is bool or data is None:
-#         return json.dumps(data)
-#     elif type(data) is dict:
-#         return '[complex value]'
-#     else:
-#         return data
-
-
-
 def _format_node_(node):
     """Format tree childs"""
     formatted_node = _jsonify_tree_(node)
@@ -21,7 +10,7 @@ def _format_node_(node):
 
 
 def _jsonify_tree_(tree):
-
+    """Format tree to json-like dictionary"""
     key = tree.get('key')
 
     status = tree.get('status')
@@ -38,42 +27,15 @@ def _jsonify_tree_(tree):
             result.update(formated_child)
 
     if status == 'added':
-        result.update({key:
-            {"status": "added",
-             "value": value}
-        })
-
+        result.update({key: {"status": "added", "value": value}})
 
     if status == 'removed':
-        result.update({key:
-            {"status": "removed",
-             "value": value}
-        })
-
+        result.update({key: {"status": "removed", "value": value}})
 
     if status == 'updated':
-        result.update({key:
-            {"status": status,
-             "old_value": value,
-             "new_value": value2}
-        })
-
+        result.update({key: {"status": status, "old_value": value, "new_value": value2}})
 
     if status == 'same':
-        result.update({key:
-            {"status": "same",
-             "value": value}
-        })
-
-    # if node['status'] == 'removed':
-    #     result = f"Property '{key}' was removed"
-
-    # if status == 'updated':
-    #     result = f"Property '{key}' was updated. From {value} to {value2}"
-
-    # if status == 'child':
-    #     strings = [_format_node_(child, key) for child in childs if child]
-    #     truly_strings = [string for string in strings if string]
-    #     result = '\n'.join(truly_strings)
+        result.update({key: {"status": "same", "value": value}})
 
     return result

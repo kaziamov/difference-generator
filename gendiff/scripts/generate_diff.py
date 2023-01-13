@@ -7,6 +7,7 @@ import argparse
 from gendiff.scripts.parsing import read_and_parse
 from gendiff.scripts.formatting import format_tree, get_formats
 
+
 def main():
     """Сreate command-line interface for program"""
     parser = argparse.ArgumentParser(
