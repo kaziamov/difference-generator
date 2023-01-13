@@ -5,8 +5,7 @@ import argparse
 
 # Import local modules
 from gendiff.scripts.parsing import read_and_parse
-from gendiff.scripts.formatting import format_tree
-
+from gendiff.scripts.formatting import format_tree, get_formats
 
 def main():
     """Сreate command-line interface for program"""
@@ -19,7 +18,7 @@ def main():
     parser.add_argument('-f', '--format',
                         metavar='FORMAT',
                         default='stylish',
-                        choices=['stylish', 'plain'],
+                        choices=get_formats(),
                         help='Format style to output ("stylish" by default)')
 
     args = parser.parse_args()
