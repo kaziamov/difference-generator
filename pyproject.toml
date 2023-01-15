@@ -2,8 +2,8 @@
 name = "hexlet-code"
 version = "0.1.0"
 description = "Utility for comparesing two files and find difference"
-authors = ["Ilia Kaziamov <ilya.kazyamov@gmail.com>"]
-repository = "https://github.com/kazyamov/python-project-50"
+authors = ["Ilia Kaziamov <kaziamov@outlook.com>"]
+repository = "https://github.com/kaziamov/python-project-50"
 packages = [ { include = 'gendiff' }, ]
 classifiers = [
 	"Environment :: Console",
