@@ -1,4 +1,4 @@
-from gendiff.scripts.parsing import load_json, load_yaml
+from gendiff.parsing import load_json, load_yaml
 from tests.conftest import fixtures_path
 import pytest
 

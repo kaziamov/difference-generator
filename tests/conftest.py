@@ -2,7 +2,7 @@ import os
 # import pytest
 import json
 
-from gendiff.scripts.parsing import read_and_parse
+from gendiff.parsing import read_and_parse
 
 
 def fixtures_path(path):

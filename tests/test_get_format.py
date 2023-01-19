@@ -1,4 +1,4 @@
-from gendiff.scripts.parsing import get_format
+from gendiff.parsing import get_format
 import pytest
 
 

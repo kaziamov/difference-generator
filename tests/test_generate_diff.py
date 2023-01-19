@@ -38,7 +38,3 @@ def test_generate_diff_tree_files_in_plain(file1, file2, expected):
 @pytest.mark.parametrize("file1, file2, expected", flat_json_fixtures)
 def test_generate_diff_flat_files_in_json(file1, file2, expected):
     assert generate_diff(file1, file2, 'json') == expected
-
-# @pytest.mark.parametrize("file1, file2, expected", tree_json_fixtures)
-# def test_generate_diff_tree_files_in_json(file1, file2, expected):
-#     assert generate_diff(file1, file2, 'json') == expected
