@@ -13,6 +13,6 @@ jobs:
       - uses: actions/setup-python@v2
       - run: pip install poetry
       - run: make install
-      - run: make mtest
+      - run: make light-test
       - run: make gendiff-help
       - run: make lint

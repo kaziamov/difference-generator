@@ -14,13 +14,13 @@ example: gendiff-flat gendiff-tree
 gendiff-help:
 	poetry run gendiff -h
 
-mtest:
+full-test:
 	poetry run pytest --show-capture=stdout --disable-pytest-warnings -v --tb=no
-vtest:
+light-test:
 	poetry run pytest -vv
 lint:
 	poetry run flake8 gendiff
-check: mtest lint
+check: light-test lint
 push: check
 	git push
 
