@@ -1,12 +1,23 @@
+# Build-in modules
+from pathlib import PurePosixPath
+
+# Local modules
 from gendiff.parsing import parse_data
 
 
-def get_data():
-    pass
+def get_data(data):
+    datatype = get_format(data)
+    if data:
+        data = open_and_read_file(data)
+    return data, datatype
 
 
-def open_two_files(path_to_file1, path_to_file2):
-    """Open two files and return it like dictionaries."""
-    dict1 = parse_data(path_to_file1)
-    dict2 = parse_data(path_to_file2)
-    return dict1, dict2
+def get_format(file):
+    """Return suffix of file."""
+    return PurePosixPath(file).suffix[1:]
+
+
+def open_and_read_file(path_to_file):
+    """Open and read file."""
+    with open(path_to_file, 'r', encoding="utf-8") as file:
+        return file.read()

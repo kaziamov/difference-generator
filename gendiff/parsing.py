@@ -7,38 +7,31 @@ except ImportError:
 
 # Import build-in modules
 import json
-from pathlib import PurePosixPath
+
 
 # Import local modules
 
 
-def get_format(file):
-    """Return suffix of file."""
-    return PurePosixPath(file).suffix[1:]
 
-
-def parse_data(path_to_file):
+def parse_data(data, format_):
     """Parse file. Supported types is JSON, YAML and YML."""
     load_options = {
         'json': load_json,
         'yaml': load_yaml,
         'yml': load_yaml,
     }
-    format_ = get_format(path_to_file)
     action = load_options.get(format_, make_raise)
-    return action(path_to_file)
+    return action(data)
 
 
-def load_json(path_to_file):
+def load_json(data):
     """Open and read JSON. And return it."""
-    with open(path_to_file, 'r') as file:
-        return json.load(file)
+    return json.loads(data)
 
 
-def load_yaml(path_to_file):
+def load_yaml(data):
     """Open and read YAML or YML. And return it."""
-    with open(path_to_file, 'r') as file:
-        return yaml.load(file, Loader=Loader)
+    return yaml.load(data, Loader=Loader)
 
 
 def make_raise(*args):
