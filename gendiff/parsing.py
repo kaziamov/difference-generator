@@ -17,7 +17,7 @@ def get_format(file):
     return PurePosixPath(file).suffix[1:]
 
 
-def read_and_parse(path_to_file):
+def parse_data(path_to_file):
     """Parse file. Supported types is JSON, YAML and YML."""
     load_options = {
         'json': load_json,
@@ -43,5 +43,4 @@ def load_yaml(path_to_file):
 
 def make_raise(*args):
     """Get raise for unsupported file type"""
-    # TODO Fix raise type
-    raise "Can't read because file type is not supported"
+    raise TypeError("Can't read because input data type is not supported")

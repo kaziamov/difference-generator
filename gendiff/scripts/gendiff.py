@@ -1,44 +1,25 @@
 #!/usr/bin/env python
 
-# Import build-in modules
-import argparse
-
 # Import local modules
-from gendiff.parsing import read_and_parse
-from gendiff.formatting import format_tree, get_formats
+from gendiff.parsing import parse_data
+from gendiff.formatting import format_tree
+from gendiff.cli import get_args
+# from gendiff.receiving import get_data
 
 
 def main():
-    """Сreate command-line interface for program"""
-    parser = argparse.ArgumentParser(
-        prog='gendiff', description='Program for compare two files and print difference. Supported file types: JSON and YAML/YML')
-    parser.add_argument('first_file',
-                        help='First file to compare')
-    parser.add_argument('second_file',
-                        help='Second file to compare')
-    parser.add_argument('-f', '--format',
-                        metavar='FORMAT',
-                        default='stylish',
-                        choices=get_formats(),
-                        help='Format style to output ("stylish" by default)')
-    args = parser.parse_args()
+    """Create and print diff from arguments"""
+    args = get_args()
     diff = generate_diff(args.first_file, args.second_file, args.format)
     print(diff)
 
 
 def generate_diff(path_to_file1, path_to_file2, style="stylish"):
-    """Generate tree of difference from two dictionaries."""
-    gendiff = _create_root(read_and_parse(path_to_file1),
-                           read_and_parse(path_to_file2))
+    """Generate tree of difference from two data files."""
+    gendiff = _create_root(parse_data(path_to_file1),
+                           parse_data(path_to_file2))
     result = format_tree(gendiff, style)
     return result
-
-
-def open_two_files(path_to_file1, path_to_file2):
-    """Open two files and return it like dictionaries."""
-    dict1 = read_and_parse(path_to_file1)
-    dict2 = read_and_parse(path_to_file2)
-    return dict1, dict2
 
 
 def _create_root(data1, data2):
