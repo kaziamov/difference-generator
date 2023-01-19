@@ -4,8 +4,8 @@
 import argparse
 
 # Import local modules
-from gendiff.scripts.parsing import read_and_parse
-from gendiff.scripts.formatting import format_tree, get_formats
+from gendiff.parsing import read_and_parse
+from gendiff.formatting import format_tree, get_formats
 
 
 def main():
