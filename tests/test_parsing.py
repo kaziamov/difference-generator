@@ -5,7 +5,6 @@ from tests.conftest import fixtures_path
 
 import pytest
 import requests
-import json
 
 
 @pytest.mark.parametrize("input_value, expected", [
