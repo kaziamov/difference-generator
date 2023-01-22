@@ -15,9 +15,9 @@ gendiff-help:
 	poetry run gendiff -h
 
 full-test:
-	poetry run pytest --show-capture=stdout --disable-pytest-warnings -v --tb=no
+	poetry run pytest --show-capture=stdout --showlocals -vv
 light-test:
-	poetry run pytest -vv
+	poetry run pytest --no-summary --disable-pytest-warnings
 lint:
 	poetry run flake8 gendiff
 check: light-test lint
