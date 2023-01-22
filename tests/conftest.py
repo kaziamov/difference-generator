@@ -3,6 +3,7 @@ import os
 import json
 
 from gendiff.parsing import parse_data
+from gendiff.receiving import get_data
 
 
 def fixtures_path(path):
@@ -32,7 +33,7 @@ flat_plain_fixtures = [
 
 
 flat_json_expected = json.dumps(
-    parse_data(expected_dir('flat_json_expected.json'))
+    parse_data(get_data(expected_dir('flat_json_expected.json')), 'json')
 )
 
 flat_json_fixtures = [

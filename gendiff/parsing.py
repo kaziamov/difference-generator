@@ -12,24 +12,23 @@ import json
 # Import local modules
 
 
-
 def parse_data(data, format_):
     """Parse file. Supported types is JSON, YAML and YML."""
     load_options = {
-        'json': load_json,
-        'yaml': load_yaml,
-        'yml': load_yaml,
+        'json': parse_json,
+        'yaml': parse_yaml,
+        'yml': parse_yaml,
     }
     action = load_options.get(format_, make_raise)
     return action(data)
 
 
-def load_json(data):
+def parse_json(data):
     """Open and read JSON. And return it."""
     return json.loads(data)
 
 
-def load_yaml(data):
+def parse_yaml(data):
     """Open and read YAML or YML. And return it."""
     return yaml.load(data, Loader=Loader)
 

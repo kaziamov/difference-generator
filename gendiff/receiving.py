@@ -1,15 +1,11 @@
 # Build-in modules
 from pathlib import PurePosixPath
 
-# Local modules
-from gendiff.parsing import parse_data
-
 
 def get_data(data):
-    datatype = get_format(data)
-    if data:
+    if type(data) != 'str':
         data = open_and_read_file(data)
-    return data, datatype
+    return data
 
 
 def get_format(file):
