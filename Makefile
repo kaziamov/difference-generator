@@ -19,7 +19,7 @@ full-test:
 light-test:
 	poetry run pytest --no-summary --disable-pytest-warnings
 lint:
-	poetry run flake8 gendiff
+	poetry run flake8 gendiff tests
 check: light-test lint
 push: check
 	git push
