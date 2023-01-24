@@ -1,7 +1,7 @@
 # Import local modules
-import gendiff.scripts.formatters.stylish as stylish
-import gendiff.scripts.formatters.plain as plain
-import gendiff.scripts.formatters.jsonify as jsonify
+import gendiff.formatters.stylish as stylish
+import gendiff.formatters.plain as plain
+import gendiff.formatters.jsonify as jsonify
 
 FORMATS = {
     'stylish': stylish,

@@ -1,11 +1,10 @@
 #!/usr/bin/env python
 
 # Import local modules
-from gendiff.receiving import get_data, get_format
+from gendiff.getting_data import get_data, get_format
 from gendiff.parsing import parse_data
 from gendiff.formatting import format_tree
 from gendiff.cli import get_args
-# from gendiff.receiving import get_data
 
 
 def main():

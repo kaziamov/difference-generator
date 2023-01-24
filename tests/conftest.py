@@ -3,7 +3,7 @@ import os
 import json
 
 from gendiff.parsing import parse_data
-from gendiff.receiving import get_data
+from gendiff.getting_data import get_data
 
 
 def fixtures_path(path):

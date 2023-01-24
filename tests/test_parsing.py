@@ -1,5 +1,5 @@
-from gendiff.parsing import parse_json, parse_yaml, parse_data
-from gendiff.receiving import get_data
+from gendiff.parsing import parse_data
+from gendiff.getting_data import get_data, get_format
 
 from tests.conftest import fixtures_path
 
@@ -8,24 +8,12 @@ import requests
 
 
 @pytest.mark.parametrize("input_value, expected", [
-    (fixtures_path('flat/')('flat_1.json'), {'host': 'hexlet.io', 'timeout': 50, 'proxy': '123.234.53.22', 'follow': False})
-])
-def test_parse_json(input_value, expected):
-    assert parse_json(get_data(input_value)) == expected
-
-
-@pytest.mark.parametrize("input_value, expected", [
-    (fixtures_path('flat/')('flat_1.yaml'), {'host': 'hexlet.io', 'timeout': 50, 'proxy': '123.234.53.22', 'follow': False})
-])
-def test_parse_yaml(input_value, expected):
-    assert parse_yaml(get_data(input_value)) == expected
-
-
-@pytest.mark.parametrize("input_value, expected", [
+    (fixtures_path('flat/')('flat_1.json'), {'host': 'hexlet.io', 'timeout': 50, 'proxy': '123.234.53.22', 'follow': False}),
+    (fixtures_path('flat/')('flat_1.yaml'), {'host': 'hexlet.io', 'timeout': 50, 'proxy': '123.234.53.22', 'follow': False}),
     (fixtures_path('flat/')('flat_1.yml'), {'host': 'hexlet.io', 'timeout': 50, 'proxy': '123.234.53.22', 'follow': False})
 ])
-def test_parse_yml(input_value, expected):
-    assert parse_yaml(get_data(input_value)) == expected
+def test_parse_data(input_value, expected):
+    assert parse_data(get_data(input_value), get_format(input_value)) == expected
 
 
 def test_parse_from_get_request():
