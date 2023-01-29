@@ -1,7 +1,5 @@
-# Build-in modules
 import argparse
 
-# Local modules
 from gendiff.formatting import get_formats
 
 

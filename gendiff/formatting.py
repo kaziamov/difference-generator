@@ -1,4 +1,3 @@
-# Import local modules
 import gendiff.formatters.stylish as stylish
 import gendiff.formatters.plain as plain
 import gendiff.formatters.jsonify as jsonify
@@ -18,4 +17,5 @@ def format_tree(tree, style):
 
 
 def get_formats():
+    """Get all avaliable formatting formats"""
     return FORMATS.keys()
