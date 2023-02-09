@@ -11,6 +11,8 @@ FORMATS = {
 
 def format_tree(tree, style):
     """Format tree with selected style"""
+    if style not in FORMATS:
+        raise TypeError("Unsupported format style")
     formatter = FORMATS[style]
     result = formatter._format_node_(tree)
     return result
